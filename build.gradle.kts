@@ -3,12 +3,15 @@ plugins {
     `maven-publish`
 }
 
-group "dev.plex"
-version "0.1"
+group = "dev.plex"
+description = "Module-BukkitTelnet"
+version = "1.0"
 
 repositories {
     mavenLocal()
+
     mavenCentral()
+
     maven {
         url = uri("https://papermc.io/repo/repository/maven-public/")
     }
@@ -20,6 +23,7 @@ repositories {
     maven {
         url = uri("https://nexus.telesphoreo.me/repository/totalfreedom")
     }
+
     maven {
         url = uri("https://jitpack.io")
     }
@@ -63,6 +67,6 @@ publishing {
 }
 
 tasks.getByName<Jar>("jar") {
-    archiveBaseName.set("Plex-BukkitTelnet")
+    archiveBaseName.set("Module-BukkitTelnet")
 }
 

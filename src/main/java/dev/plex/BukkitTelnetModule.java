@@ -3,13 +3,12 @@ package dev.plex;
 import dev.plex.listener.BukkitTelnetListener;
 import dev.plex.module.PlexModule;
 import lombok.Getter;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.RegisteredServiceProvider;
 
-public class BukkitTelnetModule extends PlexModule {
-
+public class BukkitTelnetModule extends PlexModule
+{
     @Getter
     private static BukkitTelnetModule module;
 
@@ -17,13 +16,16 @@ public class BukkitTelnetModule extends PlexModule {
     private Permission permissions = null;
 
     @Override
-    public void load() {
+    public void load()
+    {
         module = this;
     }
 
     @Override
-    public void enable() {
-        if (!setupPermissions() && getPlex().getSystem().equalsIgnoreCase("permissions") && !Bukkit.getPluginManager().isPluginEnabled("Vault")) {
+    public void enable()
+    {
+        if (!setupPermissions() && getPlex().getSystem().equalsIgnoreCase("permissions") && !Bukkit.getPluginManager().isPluginEnabled("Vault"))
+        {
             throw new RuntimeException("Plex-BukkitTelnet requires the 'Vault' plugin as well as a Permissions plugin that hooks into 'Vault.' We recommend LuckPerms!");
         }
 
@@ -31,11 +33,12 @@ public class BukkitTelnetModule extends PlexModule {
     }
 
     @Override
-    public void disable() {
-
+    public void disable()
+    {
     }
 
-    private boolean setupPermissions() {
+    private boolean setupPermissions()
+    {
         RegisteredServiceProvider<Permission> rsp = Bukkit.getServicesManager().getRegistration(Permission.class);
         permissions = rsp.getProvider();
         return permissions != null;
