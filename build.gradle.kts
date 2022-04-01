@@ -51,6 +51,6 @@ publishing {
 }
 
 tasks.getByName<Jar>("jar") {
-    archiveBaseName.set("Module-BukkitTelnet")
+    archiveBaseName.set("Plex-BukkitTelnet")
     archiveVersion.set("")
 }
