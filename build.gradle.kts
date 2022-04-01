@@ -8,8 +8,6 @@ description = "Module-BukkitTelnet"
 version = "1.0"
 
 repositories {
-    mavenLocal()
-
     mavenCentral()
 
     maven {
@@ -40,23 +38,9 @@ dependencies {
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
 }
 
-tasks {
-    compileJava {
-        options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
-
-        // Set the release flag. This configures what version bytecode the compiler will emit, as well as what JDK APIs are usable.
-        // See https://openjdk.java.net/jeps/247 for more information.
-        options.release.set(17)
-    }
-    javadoc {
-        options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
-    }
-    processResources {
-        filteringCharset = Charsets.UTF_8.name() // We want UTF-8 for everything
-    }
-
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
-
 
 publishing {
     publications {
@@ -68,5 +52,5 @@ publishing {
 
 tasks.getByName<Jar>("jar") {
     archiveBaseName.set("Module-BukkitTelnet")
+    archiveVersion.set("")
 }
-
