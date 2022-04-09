@@ -34,7 +34,7 @@ public class BukkitTelnetListener extends PlexListener
         else if (plugin.getSystem().equalsIgnoreCase("permissions"))
         {
             PlexLog.debug("Plex-BukkitTelnet using permissions check");
-            final OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(player.getUuid()));
+            final OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(player.getUuid());
             if (BukkitTelnetModule.getModule().getPermissions().playerHas(null, offlinePlayer, "plex.telnet.autoconnect"))
             {
                 event.setBypassPassword(true);
