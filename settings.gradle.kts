@@ -1,2 +1,2 @@
-rootProject.name = "plex-bukkittelnet"
+rootProject.name = "Module-BukkitTelnet"
 
