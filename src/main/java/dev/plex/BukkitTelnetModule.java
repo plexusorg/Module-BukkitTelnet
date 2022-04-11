@@ -4,9 +4,7 @@ import dev.plex.listener.BukkitTelnetListener;
 import dev.plex.module.PlexModule;
 import lombok.Getter;
 import me.totalfreedom.bukkittelnet.BukkitTelnet;
-import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class BukkitTelnetModule extends PlexModule
 {
