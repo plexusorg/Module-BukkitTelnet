@@ -7,14 +7,13 @@ group "dev.plex"
 version "0.1"
 
 repositories {
-    mavenLocal()
     mavenCentral()
     maven {
         url = uri("https://papermc.io/repo/repository/maven-public/")
     }
 
     maven {
-        url = uri("https://nexus.telesphoreo.me/repository/plex")
+        url = uri("https://nexus.telesphoreo.me/repository/plex-snapshots/")
     }
 
     maven {
@@ -29,11 +28,13 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.22")
     annotationProcessor("org.projectlombok:lombok:1.18.22")
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
-    compileOnly("dev.plex:Plex:0.10-SNAPSHOT")
+    compileOnly("dev.plex:Plex:1.0.1-SNAPSHOT")
     compileOnly("me.totalfreedom:BukkitTelnet:4.7") {
         exclude("org.spigotmc", "spigot-api")
     }
-    compileOnly("com.github.MilkBowl:VaultAPI:1.7")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7") {
+        exclude("org.bukkit", "bukkit")
+    }
 }
 
 tasks {
