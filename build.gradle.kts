@@ -4,8 +4,8 @@ plugins {
 }
 
 group = "dev.plex"
-version = "0.1"
-description = "Plex-BukkitTelnet"
+version = "1.0"
+description = "Module-BukkitTelnet"
 
 repositories {
     mavenCentral()
