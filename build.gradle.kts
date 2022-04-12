@@ -3,8 +3,9 @@ plugins {
     `maven-publish`
 }
 
-group "dev.plex"
-version "0.1"
+group = "dev.plex"
+version = "0.1"
+description = "Plex-BukkitTelnet"
 
 repositories {
     mavenCentral()
