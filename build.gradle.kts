@@ -8,7 +8,6 @@ version "0.1"
 
 repositories {
     mavenCentral()
-    mavenLocal()
     maven {
         url = uri("https://papermc.io/repo/repository/maven-public/")
     }
@@ -18,7 +17,7 @@ repositories {
     }
 
     maven {
-        url = uri("https://nexus.telesphoreo.me/repository/totalfreedom")
+        url = uri("https://nexus.telesphoreo.me/repository/totalfreedom/")
     }
     maven {
         url = uri("https://jitpack.io")
@@ -30,7 +29,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.22")
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
     compileOnly("dev.plex:Plex:1.0.1-SNAPSHOT")
-    compileOnly("me.totalfreedom:bukkittelnet:4.8-SNAPSHOT") {
+    compileOnly("me.totalfreedom:bukkittelnet:4.8") {
         exclude("org.spigotmc", "spigot-api")
     }
 }
@@ -49,7 +48,6 @@ tasks {
     processResources {
         filteringCharset = Charsets.UTF_8.name() // We want UTF-8 for everything
     }
-
 }
 
 
