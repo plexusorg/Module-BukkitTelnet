@@ -29,7 +29,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.22")
     annotationProcessor("org.projectlombok:lombok:1.18.22")
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
-    compileOnly("dev.plex:Plex:1.0.2-SNAPSHOT")
+    compileOnly("dev.plex:Plex:1.1-SNAPSHOT")
     compileOnly("me.totalfreedom:BukkitTelnet:4.8") {
         exclude("org.papermc.paper", "paper-api")
     }
