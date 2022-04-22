@@ -22,10 +22,10 @@ public class BukkitTelnetModule extends PlexModule
     @Override
     public void enable()
     {
-        if (getPlex().getSystem().equalsIgnoreCase("permissions") && !Bukkit.getPluginManager().isPluginEnabled("Vault"))
+        /*if (getPlex().getSystem().equalsIgnoreCase("permissions") && !Bukkit.getPluginManager().isPluginEnabled("Vault"))
         {
             throw new RuntimeException("Plex-BukkitTelnet requires the 'Vault' plugin as well as a Permissions plugin that hooks into 'Vault.' We recommend LuckPerms!");
-        }
+        }*/
 
         if (!Bukkit.getPluginManager().isPluginEnabled("BukkitTelnet"))
         {
