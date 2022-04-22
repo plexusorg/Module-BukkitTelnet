@@ -1,4 +1,4 @@
-name: Plex-BukkitTelnet
+name: Module-BukkitTelnet
 main: dev.plex.BukkitTelnetModule
 description: The Plex module for BukkitTelnet
 version: 1.0
