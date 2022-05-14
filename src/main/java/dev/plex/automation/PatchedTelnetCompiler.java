@@ -24,7 +24,8 @@ import java.util.Timer;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-public class PatchedTelnetCompiler {
+public class PatchedTelnetCompiler
+{
     private static final PluginManager PLUGIN_MANAGER = Bukkit.getPluginManager();
     private static final URI CODE_ARCHIVE = URI.create("https://github.com/plexusorg/BukkitTelnet/archive/refs/heads/master.zip");
     private static final Path PLUGIN_DIRECTORY = Bukkit.getServer().getPluginsFolder().toPath();
@@ -37,13 +38,16 @@ public class PatchedTelnetCompiler {
     private static final String DOWNLOADED_ARCHIVE_PATH = String.valueOf(ROOT_PATH.resolve("BukkitTelnet-master.zip"));
     private static final HttpClient HTTP_CLIENT = HttpClient.newHttpClient();
 
-    public static void execute() throws Exception {
+    public static void execute() throws Exception
+    {
         // Create directories
         final List<Path> directories = ImmutableList.of(ROOT_PATH, EXTRACT_TARGET);
 
-        for (Path directory : directories) {
+        for (Path directory : directories)
+        {
             PlexLog.debug("Checking if {0} exists...", String.valueOf(directory));
-            if (Files.notExists(directory)) {
+            if (Files.notExists(directory))
+            {
                 PlexLog.debug("It doesn't! Creating directory...");
                 Files.createDirectory(directory);
             }
@@ -52,7 +56,8 @@ public class PatchedTelnetCompiler {
         downloadArchive();
     }
 
-    private static void downloadArchive() throws Exception {
+    private static void downloadArchive() throws Exception
+    {
         PlexLog.log("Downloading archive...");
         // Create the request
         final HttpRequest request = HttpRequest.newBuilder()
@@ -80,23 +85,30 @@ public class PatchedTelnetCompiler {
         extractArchive();
     }
 
-    private static void extractArchive() throws Exception {
+    private static void extractArchive() throws Exception
+    {
         PlexLog.log("Extracting archive...");
         final ZipInputStream inputStream = new ZipInputStream(new FileInputStream(DOWNLOADED_ARCHIVE_PATH));
         ZipEntry entry = inputStream.getNextEntry();
 
-        while (entry != null) {
+        while (entry != null)
+        {
             final Path outputDestination = EXTRACT_TARGET.resolve(entry.getName());
 
-            if (entry.isDirectory()) {
-                if (Files.notExists(outputDestination)) {
+            if (entry.isDirectory())
+            {
+                if (Files.notExists(outputDestination))
+                {
                     PlexLog.debug("{0} doesn't exist, creating it!", String.valueOf(outputDestination));
                     Files.createDirectory(outputDestination);
                 }
-            } else {
+            }
+            else
+            {
                 final FileOutputStream outputStream = new FileOutputStream(String.valueOf(outputDestination));
                 int read = 0;
-                while ((read = inputStream.read()) != -1) {
+                while ((read = inputStream.read()) != -1)
+                {
                     outputStream.write(read);
                 }
 
@@ -110,12 +122,14 @@ public class PatchedTelnetCompiler {
         executeGradleTarget();
     }
 
-    private static void executeGradleTarget() throws Exception {
+    private static void executeGradleTarget() throws Exception
+    {
         PlexLog.log("Executing gradle target...");
         boolean nix = !System.getProperty("os.name").toLowerCase().contains("win"); // Assume Windows if name contains win
 
         String gradlew = String.valueOf(nix ? EXTRACT_SUBDIR.resolve("gradlew") : EXTRACT_SUBDIR.resolve("gradlew.bat"));
-        if (nix) {
+        if (nix)
+        {
             final ProcessBuilder chmodBuilder = new ProcessBuilder("chmod", "+x", gradlew);
             Process chmodProcess = chmodBuilder.start();
             chmodProcess.waitFor();
@@ -135,14 +149,18 @@ public class PatchedTelnetCompiler {
         copyBinary();
     }
 
-    private static void copyBinary() throws Exception {
+    private static void copyBinary() throws Exception
+    {
         PlexLog.log("Copying binaries...");
         final File binaryDirectory = new File(String.valueOf(BINARIES_PATH));
         final File[] files = binaryDirectory.listFiles();
 
-        if (files == null) {
+        if (files == null)
+        {
             throw new IllegalStateException("Didn't manage to compile jars!");
-        } else if (files.length == 0) {
+        }
+        else if (files.length == 0)
+        {
             throw new IllegalStateException("Didn't manage to compile jars!");
         }
 
@@ -162,7 +180,8 @@ public class PatchedTelnetCompiler {
         done();
     }
 
-    private static void done() {
+    private static void done()
+    {
         BukkitTelnetModule.getModule().enable();
     }
 }
