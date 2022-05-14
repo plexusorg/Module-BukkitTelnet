@@ -14,14 +14,14 @@ repositories {
     }
 
     maven {
-        url = uri("https://nexus.telesphoreo.me/repository/plex-snapshots/")
+        url = uri("https://nexus.telesphoreo.me/repository/plex/")
     }
 
     maven {
-        url = uri("https://nexus.telesphoreo.me/repository/totalfreedom/")
-    }
-    maven {
         url = uri("https://jitpack.io")
+        content {
+            includeGroup("com.github.plexusorg")
+        }
     }
 }
 
@@ -31,7 +31,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
     compileOnly("dev.plex:server:1.1-SNAPSHOT")
     compileOnly("dev.plex:api:1.1-SNAPSHOT")
-    compileOnly("me.totalfreedom:BukkitTelnet:4.8") {
+    compileOnly("com.github.plexusorg:BukkitTelnet:6908ff201f") {
         exclude("org.papermc.paper", "paper-api")
     }
 }
