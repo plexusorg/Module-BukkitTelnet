@@ -3,7 +3,10 @@ package dev.plex.automation;
 import com.google.common.collect.ImmutableList;
 import dev.plex.BukkitTelnetModule;
 import dev.plex.util.PlexLog;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 
@@ -41,18 +44,6 @@ public class PatchedTelnetCompiler
 
     public static void execute() throws Exception
     {
-        // Check if incorrect BukkitTelnet plugin is present
-        if (PLUGIN_MANAGER.isPluginEnabled("BukkitTelnet"))
-        {
-            Plugin plugin = PLUGIN_MANAGER.getPlugin("BukkitTelnet");
-            if (plugin == null) throw new IllegalStateException("Unpatched BukkitTelnet cannot be null while enabled!");
-            PLUGIN_MANAGER.disablePlugin(plugin);
-
-            Path path = Path.of(plugin.getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
-            Files.delete(path);
-        }
-
-
         // Create directories
         final List<Path> directories = ImmutableList.of(ROOT_PATH, EXTRACT_TARGET);
 
@@ -192,8 +183,33 @@ public class PatchedTelnetCompiler
         }
 
         Timer timer = new Timer();
+        Plugin plugin = null;
 
-        final Plugin plugin = PLUGIN_MANAGER.loadPlugin(TARGET_PLUGIN);
+        // Check if incorrect BukkitTelnet plugin is present
+        if (PLUGIN_MANAGER.isPluginEnabled("BukkitTelnet"))
+        {
+            PlexLog.warn("Stopping server since unpatched BukkitTelnet was already loaded, please restart and it should work!");
+            // Running stop doesn't seem to work...
+
+            Bukkit.savePlayers();
+
+            for (Player onlinePlayer : Bukkit.getOnlinePlayers())
+            {
+                onlinePlayer.kick(Component.text("Server is restarting due to a plugin upgrade, please wait!"));
+            }
+
+            for (World world : Bukkit.getWorlds())
+            {
+                Bukkit.unloadWorld(world, true);
+            }
+
+            Runtime.getRuntime().halt(0);
+            return;
+        }
+        else
+        {
+            plugin = PLUGIN_MANAGER.loadPlugin(TARGET_PLUGIN);
+        }
         if (plugin == null) throw new IllegalStateException("BukkitTelnet cannot be null after successful compile!");
 
         plugin.onLoad();
