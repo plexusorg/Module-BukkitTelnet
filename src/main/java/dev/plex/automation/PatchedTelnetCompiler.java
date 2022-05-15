@@ -31,6 +31,7 @@ public class PatchedTelnetCompiler
     private static final Path PLUGIN_DIRECTORY = Bukkit.getServer().getPluginsFolder().toPath();
     private static final File TARGET_PLUGIN = PLUGIN_DIRECTORY.resolve("BukkitTelnet.jar").toFile();
     private static final Path WORKING_DIRECTORY = Path.of(System.getProperty("user.dir"));
+    private static final Path HIDDEN_GRADLE = WORKING_DIRECTORY.resolve(".gradle");
     private static final Path ROOT_PATH = WORKING_DIRECTORY.resolve("build");
     private static final Path EXTRACT_TARGET = ROOT_PATH.resolve("extract");
     private static final Path EXTRACT_SUBDIR = EXTRACT_TARGET.resolve("BukkitTelnet-master");
@@ -40,6 +41,18 @@ public class PatchedTelnetCompiler
 
     public static void execute() throws Exception
     {
+        // Check if incorrect BukkitTelnet plugin is present
+        if (PLUGIN_MANAGER.isPluginEnabled("BukkitTelnet"))
+        {
+            Plugin plugin = PLUGIN_MANAGER.getPlugin("BukkitTelnet");
+            if (plugin == null) throw new IllegalStateException("Unpatched BukkitTelnet cannot be null while enabled!");
+            PLUGIN_MANAGER.disablePlugin(plugin);
+
+            Path path = Path.of(plugin.getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+            Files.delete(path);
+        }
+
+
         // Create directories
         final List<Path> directories = ImmutableList.of(ROOT_PATH, EXTRACT_TARGET);
 
@@ -169,6 +182,14 @@ public class PatchedTelnetCompiler
                 .sorted(Comparator.reverseOrder())
                 .map(Path::toFile)
                 .forEach(File::delete);
+
+        if (Files.exists(HIDDEN_GRADLE))
+        {
+            Files.walk(HIDDEN_GRADLE)
+                    .sorted(Comparator.reverseOrder())
+                    .map(Path::toFile)
+                    .forEach(File::delete);
+        }
 
         Timer timer = new Timer();
 
