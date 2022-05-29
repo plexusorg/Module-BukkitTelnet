@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.plex"
-version = "1.0"
+version = "1.1"
 description = "Module-BukkitTelnet"
 
 repositories {
