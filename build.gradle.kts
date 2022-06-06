@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.plex"
-version = "1.1"
+version = "1.2-SNAPSHOT"
 description = "Module-BukkitTelnet"
 
 repositories {
@@ -29,8 +29,8 @@ dependencies {
     compileOnly("org.projectlombok:lombok:1.18.24")
     annotationProcessor("org.projectlombok:lombok:1.18.24")
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
-    compileOnly("dev.plex:server:1.1-SNAPSHOT")
-    compileOnly("dev.plex:api:1.1-SNAPSHOT")
+    compileOnly("dev.plex:server:1.2-SNAPSHOT")
+    compileOnly("dev.plex:api:1.2-SNAPSHOT")
     compileOnly("com.github.plexusorg:BukkitTelnet:6908ff201f") {
         exclude("org.papermc.paper", "paper-api")
     }
