@@ -26,7 +26,7 @@ public class BukkitTelnetModule extends PlexModule
     @Override
     public void enable()
     {
-        if (getPlex().getSystem().equalsIgnoreCase("permissions") && !Bukkit.getPluginManager().isPluginEnabled("Vault"))
+        if (!Bukkit.getPluginManager().isPluginEnabled("Vault"))
         {
             failed = true;
             PlexLog.error("Plex-BukkitTelnet requires the 'Vault' plugin as well as a Permissions plugin that hooks into 'Vault.' We recommend LuckPerms!");
@@ -37,7 +37,7 @@ public class BukkitTelnetModule extends PlexModule
         if (!Bukkit.getPluginManager().isPluginEnabled("BukkitTelnet"))
         {
             failed = true;
-            PlexLog.warn("The Plex-BukkitTelnet module requires the BukkitTelnet plugin to work. I am automatically compiling BukkitTelnet plugin for you, however if something fails, please download it from: https://github.com/plexusorg/BukkitTelnet/releases");
+            PlexLog.warn("The BukkitTelnet module requires the BukkitTelnet plugin to work. I am automatically compiling BukkitTelnet plugin for you, however if something fails, please download it from: https://github.com/plexusorg/BukkitTelnet/releases");
             try
             {
                 PatchedTelnetCompiler.execute();
@@ -61,7 +61,7 @@ public class BukkitTelnetModule extends PlexModule
         }
         catch (ClassNotFoundException | NoSuchMethodException ignored)
         {
-            PlexLog.warn("You are using an older version of BukkitTelnet that does not support Plex. I am automatically compiling a build that does work for you, however if something fails, please download a version that does from: https://ci.plex.us.org/job/Plex-BukkitTelnet");
+            PlexLog.warn("You are using an older version of BukkitTelnet that does not support Plex. I am automatically compiling a build that does work for you, however if something fails, please download a version that does from: https://ci.plex.us.org/job/Module-BukkitTelnet");
 
             try
             {

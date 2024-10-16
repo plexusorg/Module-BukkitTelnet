@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.plex"
-version = "1.3"
+version = "1.5"
 description = "Module-BukkitTelnet"
 
 repositories {
@@ -26,17 +26,17 @@ repositories {
 }
 
 dependencies {
-    compileOnly("org.projectlombok:lombok:1.18.28")
-    annotationProcessor("org.projectlombok:lombok:1.18.28")
-    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
-    compileOnly("dev.plex:server:1.3")
+    compileOnly("org.projectlombok:lombok:1.18.34")
+    annotationProcessor("org.projectlombok:lombok:1.18.34")
+    compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+    compileOnly("dev.plex:server:1.5-SNAPSHOT")
     compileOnly("com.github.plexusorg:BukkitTelnet:6908ff201f") {
         exclude("org.papermc.paper", "paper-api")
     }
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
 tasks {
@@ -61,7 +61,7 @@ publishing {
 }
 
 tasks.getByName<Jar>("jar") {
-    archiveBaseName.set("Plex-BukkitTelnet")
+    archiveBaseName.set("Module-BukkitTelnet")
     archiveVersion.set("")
 }
 
